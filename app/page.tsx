@@ -3,13 +3,15 @@ import { AdSlot } from "@/components/ads/ad-slot";
 import { GuidesSection } from "@/components/home/guides-section";
 import { HalftoneWorkbench } from "@/components/halftone/workbench";
 import { SiteShell } from "@/components/layout/site-shell";
-
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://halftone-dithering.vercel.app";
+import { SITE_URL } from "@/lib/site-url";
 
 export const metadata: Metadata = {
-  title: "Free Halftone Generator & Image Dithering Tool — Video & SVG Export",
+  title: {
+    absolute:
+      "Free Halftone Generator & Dithering Tool — Images, Video, SVG & WebM | Halftone Dithering FX",
+  },
   description:
-    "Create halftone dot art from photos and video in your browser. Floyd–Steinberg, Jarvis, Stucki, Burkes, ordered dither, split preview, presets. Export PNG, SVG, or WebM — no signup.",
+    "Create halftone art from photos and video in your browser. Floyd–Steinberg, Jarvis, Stucki, Burkes, ordered dither, customizable mark shapes, split preview, presets. Export PNG, SVG, or WebM — no signup.",
   keywords: [
     "halftone generator",
     "halftone effect online",
@@ -21,20 +23,24 @@ export const metadata: Metadata = {
     "video halftone",
     "halftone SVG export",
     "photo to halftone",
+    "halftone shapes",
+    "square halftone",
   ],
-  alternates: { canonical: siteUrl },
+  alternates: { canonical: SITE_URL },
   openGraph: {
     title: "Halftone Dithering FX — Free Online Halftone & Dithering Generator",
     description:
-      "Turn images and video into halftone artwork. Classic dither algorithms, live split preview, PNG / SVG / WebM export.",
-    url: siteUrl,
+      "Turn images and video into halftone artwork. Classic dither algorithms, mark shapes, live split preview, PNG / SVG / WebM export.",
+    url: SITE_URL,
     type: "website",
+    locale: "en_US",
+    siteName: "Halftone Dithering FX",
   },
   twitter: {
     card: "summary_large_image",
     title: "Halftone Dithering FX — Online Halftone Generator",
     description:
-      "Halftone dots, error diffusion, and dither presets in the browser. Export PNG, SVG, or halftone video.",
+      "Halftone marks, error diffusion, and dither presets in the browser. Export PNG, SVG, or halftone video.",
   },
 };
 
@@ -47,8 +53,8 @@ export default function HomePage() {
     operatingSystem: "Web",
     offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
     description:
-      "Free online halftone generator and dithering tool for images and video. Error diffusion and ordered dither, split preview, local presets, PNG SVG and WebM export.",
-    url: siteUrl,
+      "Free online halftone generator and dithering tool for images and video. Error diffusion and ordered dither, customizable mark shapes, split preview, local presets, PNG SVG and WebM export.",
+    url: SITE_URL,
   };
 
   const faqSchema = {

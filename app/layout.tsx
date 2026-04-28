@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, JetBrains_Mono } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import { ADSENSE_CLIENT_ID } from "@/lib/adsense";
+import { SITE_URL } from "@/lib/site-url";
 import { cn } from "@/lib/utils";
 import { TooltipProvider } from "@/components/ui/tooltip";
 
@@ -18,16 +19,15 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://halftone-dithering.vercel.app";
-
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
+  metadataBase: new URL(SITE_URL),
+  applicationName: "Halftone Dithering FX",
   title: {
-    default: "Halftone Dithering FX | Free Halftone & Dithering Generator",
+    default: "Halftone Dithering FX — Free Halftone & Dithering Generator",
     template: "%s | Halftone Dithering FX",
   },
   description:
-    "Free halftone generator for images and video. Error diffusion, ordered dither, split preview, presets. Export PNG, SVG, WebM.",
+    "Free halftone generator for images and video. Error diffusion, ordered dither, dot shapes (circle, square, triangle, and more), split preview, presets. Export PNG, SVG, WebM.",
   keywords: [
     "halftone generator",
     "halftone effect",
@@ -37,22 +37,30 @@ export const metadata: Metadata = {
     "Floyd Steinberg",
     "SVG halftone",
     "dot pattern",
+    "halftone shapes",
   ],
   alternates: {
     canonical: "/",
   },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true },
+  },
   openGraph: {
-    title: "Halftone Dithering FX",
+    title: "Halftone Dithering FX — Free Halftone & Dithering Generator",
     description:
-      "Online halftone and dithering for photos and video — multiple algorithms, split preview, PNG / SVG / WebM.",
-    url: siteUrl,
+      "Online halftone and dithering for photos and video — multiple algorithms, customizable marks, split preview, PNG / SVG / WebM.",
+    url: SITE_URL,
     siteName: "Halftone Dithering FX",
     type: "website",
+    locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Halftone Dithering FX",
-    description: "Free browser halftone generator with dither presets and export to PNG, SVG, or WebM.",
+    title: "Halftone Dithering FX — Free Halftone Generator",
+    description:
+      "Browser halftone generator with dither presets, mark shapes, and export to PNG, SVG, or WebM.",
   },
   other: {
     "google-adsense-account": ADSENSE_CLIENT_ID,
