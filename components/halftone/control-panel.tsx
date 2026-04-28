@@ -1,5 +1,6 @@
 "use client";
 
+import { CaretDownIcon, CaretUpIcon } from "@phosphor-icons/react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -195,11 +196,11 @@ export function ControlPanel({
           {settings.multicolor ? (
             <div className="space-y-2 rounded-md border border-border bg-muted/20 p-3">
               <p className="text-xs text-muted-foreground">
-                Colors run from dark regions → light (add stops to shape the gradient).
+                Colors run from dark regions → light. Reorder stops to change how the gradient maps across the image.
               </p>
               <div className="flex max-h-40 flex-col gap-2 overflow-y-auto pr-1">
                 {settings.multicolorPalette.map((hex, index) => (
-                  <div key={`${index}-${hex}`} className="flex items-center gap-2">
+                  <div key={`palette-row-${index}`} className="flex items-center gap-2">
                     <Input
                       type="color"
                       className="h-9 w-14 shrink-0 cursor-pointer p-1"
@@ -212,13 +213,53 @@ export function ControlPanel({
                         })
                       }
                     />
-                    <span className="text-xs text-muted-foreground">Stop {index + 1}</span>
+                    <span className="min-w-0 flex-1 truncate text-xs text-muted-foreground">Stop {index + 1}</span>
+                    <div className="flex shrink-0 items-center gap-0.5">
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        size="icon"
+                        className="h-8 w-8"
+                        disabled={index === 0}
+                        title="Move up"
+                        onClick={() =>
+                          setSettings((prev) => {
+                            if (index <= 0) return prev;
+                            const next = [...prev.multicolorPalette];
+                            [next[index - 1], next[index]] = [next[index], next[index - 1]];
+                            return { ...prev, multicolorPalette: next };
+                          })
+                        }
+                      >
+                        <CaretUpIcon className="size-4" aria-hidden />
+                        <span className="sr-only">Move up</span>
+                      </Button>
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        size="icon"
+                        className="h-8 w-8"
+                        disabled={index >= settings.multicolorPalette.length - 1}
+                        title="Move down"
+                        onClick={() =>
+                          setSettings((prev) => {
+                            if (index >= prev.multicolorPalette.length - 1) return prev;
+                            const next = [...prev.multicolorPalette];
+                            [next[index], next[index + 1]] = [next[index + 1], next[index]];
+                            return { ...prev, multicolorPalette: next };
+                          })
+                        }
+                      >
+                        <CaretDownIcon className="size-4" aria-hidden />
+                        <span className="sr-only">Move down</span>
+                      </Button>
+                    </div>
                     {settings.multicolorPalette.length > 2 ? (
                       <Button
                         type="button"
                         variant="ghost"
                         size="sm"
-                        className="ml-auto shrink-0"
+                        className="shrink-0"
                         onClick={() =>
                           setSettings((prev) => ({
                             ...prev,

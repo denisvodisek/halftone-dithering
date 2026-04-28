@@ -1,7 +1,10 @@
 "use client";
 
 import { useEffect } from "react";
-import Script from "next/script";
+import { ADSENSE_CLIENT_ID } from "@/lib/adsense";
+
+/** Default placeholders from layout until real `NEXT_PUBLIC_AD_SLOT_*` values are set in AdSense. */
+const DEMO_AD_SLOTS = new Set(["1111111111", "2222222222", "3333333333"]);
 
 declare global {
   interface Window {
@@ -16,10 +19,10 @@ interface AdSlotProps {
 }
 
 export function AdSlot({ slot, format = "auto", className }: AdSlotProps) {
-  const adClient = process.env.NEXT_PUBLIC_ADSENSE_CLIENT;
+  const usePlaceholder = DEMO_AD_SLOTS.has(slot);
 
   useEffect(() => {
-    if (!adClient) {
+    if (usePlaceholder) {
       return;
     }
     try {
@@ -28,9 +31,9 @@ export function AdSlot({ slot, format = "auto", className }: AdSlotProps) {
     } catch {
       // Ignore ad init failures in development environments.
     }
-  }, [adClient, slot]);
+  }, [usePlaceholder, slot]);
 
-  if (!adClient) {
+  if (usePlaceholder) {
     return (
       <div
         className={`flex min-h-24 items-center justify-center rounded-lg border border-dashed border-border bg-muted/30 px-4 py-6 text-xs text-muted-foreground ${className ?? ""}`}
@@ -41,16 +44,13 @@ export function AdSlot({ slot, format = "auto", className }: AdSlotProps) {
   }
 
   return (
-    <>
-      <Script async src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adClient}`} crossOrigin="anonymous" strategy="afterInteractive" />
-      <ins
-        className="adsbygoogle"
-        style={{ display: "block", minHeight: "96px" }}
-        data-ad-client={adClient}
-        data-ad-slot={slot}
-        data-ad-format={format}
-        data-full-width-responsive="true"
-      />
-    </>
+    <ins
+      className="adsbygoogle"
+      style={{ display: "block", minHeight: "96px" }}
+      data-ad-client={ADSENSE_CLIENT_ID}
+      data-ad-slot={slot}
+      data-ad-format={format}
+      data-full-width-responsive="true"
+    />
   );
 }
