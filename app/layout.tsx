@@ -65,6 +65,13 @@ export const metadata: Metadata = {
   other: {
     "google-adsense-account": ADSENSE_CLIENT_ID,
   },
+  ...(process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
+    ? {
+        verification: {
+          google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
+        },
+      }
+    : {}),
 };
 
 export default function RootLayout({
