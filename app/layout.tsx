@@ -54,6 +54,9 @@ export const metadata: Metadata = {
     title: "Halftone Dithering FX",
     description: "Free browser halftone generator with dither presets and export to PNG, SVG, or WebM.",
   },
+  other: {
+    "google-adsense-account": ADSENSE_CLIENT_ID,
+  },
 };
 
 export default function RootLayout({
