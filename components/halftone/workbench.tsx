@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { CanvasStage } from "@/components/halftone/canvas-stage";
 import { ControlPanel } from "@/components/halftone/control-panel";
 import { PresetBar } from "@/components/halftone/preset-bar";
@@ -16,6 +16,14 @@ import {
 } from "@/lib/halftone/types";
 
 const SAVED_PRESET_STORAGE_KEY = "halftone.savedConfigs";
+
+/** Preview cap keeps huge photos responsive; exports still use full resolution. */
+const PREVIEW_MAX_LONG_SIDE = 2048;
+
+const DEFAULT_VIDEO_URL = "https://i.imgur.com/5PrJCc2.mp4";
+
+/** Some browsers leave `file.type` empty for valid video files. */
+const VIDEO_FILENAME = /\.(mp4|webm|mov|m4v|mkv|ogv)(\?.*)?$/i;
 
 function downloadBlob(blob: Blob, filename: string) {
   const url = URL.createObjectURL(blob);
@@ -55,6 +63,17 @@ export function HalftoneWorkbench() {
   const [sourceType, setSourceType] = useState<SourceType>("video");
   const [isRecordingVideo, setIsRecordingVideo] = useState(false);
 
+  /** After any user upload, ignore late async load from the default sample video. */
+  const userOverrideDefaultVideoRef = useRef(false);
+
+  const settingsRef = useRef(settings);
+  const sourceTypeRef = useRef<SourceType>(sourceType);
+
+  useLayoutEffect(() => {
+    settingsRef.current = settings;
+    sourceTypeRef.current = sourceType;
+  }, [settings, sourceType]);
+
   const originalCanvasRef = useRef<HTMLCanvasElement>(null);
   const halftoneCanvasRef = useRef<HTMLCanvasElement>(null);
   const imageRef = useRef<HTMLImageElement | null>(null);
@@ -62,49 +81,47 @@ export function HalftoneWorkbench() {
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const animationFrameRef = useRef<number | null>(null);
 
-  const processFrame = useCallback(
-    (forExport = false, scaleFactor = 1) => {
-      const halftoneCanvas = halftoneCanvasRef.current;
-      const originalCanvas = originalCanvasRef.current;
-      if (!halftoneCanvas || !originalCanvas) {
+  const processFrame = useCallback((forExport = false, scaleFactor = 1) => {
+    const halftoneCanvas = halftoneCanvasRef.current;
+    const originalCanvas = originalCanvasRef.current;
+    if (!halftoneCanvas || !originalCanvas) {
+      return null;
+    }
+
+    const kind = sourceTypeRef.current;
+    const source = kind === "video" ? videoRef.current : imageRef.current;
+    if (!source) {
+      return null;
+    }
+
+    try {
+      const result = drawHalftone({
+        source,
+        targetCanvas: halftoneCanvas,
+        settings: settingsRef.current,
+        scaleFactor,
+        minExportWidth: forExport ? 1920 : 0,
+        minExportHeight: forExport ? 1080 : 0,
+        maxLongSide: forExport ? undefined : PREVIEW_MAX_LONG_SIDE,
+      });
+
+      if (!result) {
         return null;
       }
 
-      const source = sourceType === "video" ? videoRef.current : imageRef.current;
-      if (!source) {
-        return null;
-      }
-
-      const outputWidth =
-        source instanceof HTMLVideoElement
-          ? source.videoWidth
-          : source.naturalWidth || source.width;
-      const outputHeight =
-        source instanceof HTMLVideoElement
-          ? source.videoHeight
-          : source.naturalHeight || source.height;
-
-      originalCanvas.width = outputWidth;
-      originalCanvas.height = outputHeight;
+      originalCanvas.width = result.width;
+      originalCanvas.height = result.height;
       const originalCtx = originalCanvas.getContext("2d");
       if (!originalCtx) {
         return null;
       }
-      originalCtx.drawImage(source, 0, 0, outputWidth, outputHeight);
-
-      const result = drawHalftone({
-        source,
-        targetCanvas: halftoneCanvas,
-        settings,
-        scaleFactor,
-        minExportWidth: forExport ? 1920 : 0,
-        minExportHeight: forExport ? 1080 : 0,
-      });
+      originalCtx.drawImage(source, 0, 0, result.width, result.height);
 
       return result;
-    },
-    [settings, sourceType],
-  );
+    } catch {
+      return null;
+    }
+  }, []);
 
   const stopAnimationLoop = useCallback(() => {
     if (animationFrameRef.current) {
@@ -122,10 +139,20 @@ export function HalftoneWorkbench() {
     animationFrameRef.current = requestAnimationFrame(renderTick);
   }, [processFrame, stopAnimationLoop]);
 
+  const startVideoLoopRef = useRef(startVideoLoop);
+  const stopAnimationLoopRef = useRef(stopAnimationLoop);
+  useLayoutEffect(() => {
+    startVideoLoopRef.current = startVideoLoop;
+    stopAnimationLoopRef.current = stopAnimationLoop;
+  }, [startVideoLoop, stopAnimationLoop]);
+
   const handleMediaSource = useCallback(
     (url: string, type: SourceType) => {
+      userOverrideDefaultVideoRef.current = true;
+
       if (type === "image") {
         stopAnimationLoop();
+        sourceTypeRef.current = "image";
         setSourceType("image");
         const image = new Image();
         image.crossOrigin = "anonymous";
@@ -133,11 +160,25 @@ export function HalftoneWorkbench() {
         image.onload = () => {
           imageRef.current = image;
           videoRef.current = null;
+          sourceTypeRef.current = "image";
           processFrame();
         };
         return;
       }
 
+      stopAnimationLoop();
+      const prev = videoRef.current;
+      if (prev && prev.src !== url) {
+        prev.pause();
+        prev.removeAttribute("src");
+        try {
+          prev.load();
+        } catch {
+          /* ignore */
+        }
+      }
+
+      sourceTypeRef.current = "video";
       setSourceType("video");
       const video = document.createElement("video");
       video.crossOrigin = "anonymous";
@@ -145,41 +186,97 @@ export function HalftoneWorkbench() {
       video.muted = true;
       video.loop = true;
       video.src = url;
-      video.onloadeddata = async () => {
-        await video.play();
+
+      let started = false;
+      const onReady = async () => {
+        if (started) {
+          return;
+        }
+        started = true;
+        video.removeEventListener("loadeddata", onReady);
+        video.removeEventListener("canplay", onReady);
+        try {
+          await video.play();
+        } catch {
+          /* autoplay policies / codec edge cases */
+        }
         videoRef.current = video;
         imageRef.current = null;
+        sourceTypeRef.current = "video";
         startVideoLoop();
       };
+
+      video.addEventListener("loadeddata", onReady);
+      video.addEventListener("canplay", onReady);
+      video.addEventListener(
+        "error",
+        () => {
+          video.removeEventListener("loadeddata", onReady);
+          video.removeEventListener("canplay", onReady);
+        },
+        { once: true },
+      );
+      try {
+        video.load();
+      } catch {
+        /* ignore */
+      }
     },
     [processFrame, startVideoLoop, stopAnimationLoop],
   );
 
+  /** Default sample video once on mount only — never re-run (avoids clobbering user uploads). */
   useEffect(() => {
     const video = document.createElement("video");
     video.crossOrigin = "anonymous";
     video.playsInline = true;
     video.muted = true;
     video.loop = true;
-    video.src = "https://i.imgur.com/5PrJCc2.mp4";
+    video.src = DEFAULT_VIDEO_URL;
     video.onloadeddata = async () => {
-      await video.play();
+      if (userOverrideDefaultVideoRef.current) {
+        return;
+      }
+      try {
+        await video.play();
+      } catch {
+        return;
+      }
+      if (userOverrideDefaultVideoRef.current) {
+        return;
+      }
       videoRef.current = video;
       imageRef.current = null;
-      startVideoLoop();
+      sourceTypeRef.current = "video";
+      startVideoLoopRef.current();
     };
-    return () => stopAnimationLoop();
-  }, [startVideoLoop, stopAnimationLoop]);
+    return () => {
+      stopAnimationLoopRef.current();
+      video.pause();
+      video.removeAttribute("src");
+      try {
+        video.load();
+      } catch {
+        /* ignore */
+      }
+    };
+  }, []);
 
   useEffect(() => {
     if (sourceType === "video" && videoRef.current) {
       startVideoLoop();
+    }
+  }, [sourceType, startVideoLoop]);
+
+  useEffect(() => {
+    if (sourceType !== "image" || !imageRef.current) {
       return;
     }
-    if (sourceType === "image" && imageRef.current) {
+    const id = window.setTimeout(() => {
       processFrame();
-    }
-  }, [processFrame, sourceType, startVideoLoop]);
+    }, 100);
+    return () => clearTimeout(id);
+  }, [settings, sourceType, processFrame]);
 
   const handleUpload: React.ChangeEventHandler<HTMLInputElement> = (event) => {
     const file = event.target.files?.[0];
@@ -187,7 +284,7 @@ export function HalftoneWorkbench() {
       return;
     }
     const fileUrl = URL.createObjectURL(file);
-    if (file.type.startsWith("video/")) {
+    if (file.type.startsWith("video/") || VIDEO_FILENAME.test(file.name)) {
       handleMediaSource(fileUrl, "video");
       trackEvent("upload_media", { type: "video" });
       return;

@@ -9,6 +9,8 @@ interface DrawHalftoneOptions {
   scaleFactor?: number;
   minExportWidth?: number;
   minExportHeight?: number;
+  /** Cap longest side for fast preview (exports should omit this). */
+  maxLongSide?: number;
 }
 
 function applyBoxBlur(cellValues: Float32Array, numRows: number, numCols: number, strength: number) {
@@ -77,14 +79,24 @@ export function drawHalftone({
   scaleFactor = 1,
   minExportWidth = 0,
   minExportHeight = 0,
+  maxLongSide,
 }: DrawHalftoneOptions): HalftoneRenderResult | null {
   const sourceDimensions = getSourceDimensions(source);
   if (!sourceDimensions.width || !sourceDimensions.height) {
     return null;
   }
 
-  const scaledWidth = Math.max(Math.round(sourceDimensions.width * scaleFactor), minExportWidth);
-  const scaledHeight = Math.max(Math.round(sourceDimensions.height * scaleFactor), minExportHeight);
+  let scaledWidth = Math.max(Math.round(sourceDimensions.width * scaleFactor), minExportWidth);
+  let scaledHeight = Math.max(Math.round(sourceDimensions.height * scaleFactor), minExportHeight);
+
+  if (maxLongSide && maxLongSide > 0) {
+    const long = Math.max(scaledWidth, scaledHeight);
+    if (long > maxLongSide) {
+      const factor = maxLongSide / long;
+      scaledWidth = Math.max(1, Math.round(scaledWidth * factor));
+      scaledHeight = Math.max(1, Math.round(scaledHeight * factor));
+    }
+  }
 
   targetCanvas.width = scaledWidth;
   targetCanvas.height = scaledHeight;

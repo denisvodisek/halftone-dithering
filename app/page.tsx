@@ -44,16 +44,7 @@ export default function HomePage() {
       <section className="space-y-2">
         <p className="max-w-2xl text-sm text-muted-foreground">
           Upload an image or video, tweak grid and dithering, use split view to check the result, then export PNG, SVG,
-          or WebM. Original halftone idea from{" "}
-          <a
-            href="https://codepen.io/Mikhail-Bespalov/pen/dPyyZed"
-            target="_blank"
-            rel="noreferrer"
-            className="underline underline-offset-4"
-          >
-            Mike Bespalov
-          </a>
-          .
+          or WebM.
         </p>
       </section>
       <HalftoneWorkbench />
