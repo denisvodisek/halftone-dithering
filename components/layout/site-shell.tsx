@@ -1,5 +1,6 @@
 import { AdSlot } from "@/components/ads/ad-slot";
 import { ThemeToggle } from "@/components/layout/theme-toggle";
+import { ADSENSE_SLOT_RESPONSIVE } from "@/lib/adsense";
 
 interface SiteShellProps {
   children: React.ReactNode;
@@ -18,7 +19,10 @@ export function SiteShell({ children }: SiteShellProps) {
       </header>
 
       <main className="mx-auto flex w-full max-w-7xl flex-col gap-6 px-4 py-6 pb-16 sm:px-6 lg:px-8">
-        <AdSlot slot={process.env.NEXT_PUBLIC_AD_SLOT_TOP ?? "1111111111"} format="horizontal" />
+        <AdSlot
+          name="Responsive display ad"
+          slot={process.env.NEXT_PUBLIC_AD_SLOT_TOP ?? ADSENSE_SLOT_RESPONSIVE}
+        />
         {children}
       </main>
     </div>

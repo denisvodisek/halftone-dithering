@@ -3,6 +3,7 @@ import { AdSlot } from "@/components/ads/ad-slot";
 import { GuidesSection } from "@/components/home/guides-section";
 import { HalftoneWorkbench } from "@/components/halftone/workbench";
 import { SiteShell } from "@/components/layout/site-shell";
+import { ADSENSE_SLOT_BOTTOM_BANNER } from "@/lib/adsense";
 import { SITE_URL } from "@/lib/site-url";
 
 export const metadata: Metadata = {
@@ -123,7 +124,10 @@ export default function HomePage() {
         </div>
       </section>
       <HalftoneWorkbench />
-      <AdSlot slot={process.env.NEXT_PUBLIC_AD_SLOT_INLINE ?? "3333333333"} />
+      <AdSlot
+        name="Bottom banner ad"
+        slot={process.env.NEXT_PUBLIC_AD_SLOT_INLINE ?? ADSENSE_SLOT_BOTTOM_BANNER}
+      />
       <GuidesSection />
     </SiteShell>
   );

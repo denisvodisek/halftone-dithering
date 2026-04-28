@@ -3,9 +3,6 @@
 import { useEffect } from "react";
 import { ADSENSE_CLIENT_ID } from "@/lib/adsense";
 
-/** Default placeholders from layout until real `NEXT_PUBLIC_AD_SLOT_*` values are set in AdSense. */
-const DEMO_AD_SLOTS = new Set(["1111111111", "2222222222", "3333333333"]);
-
 declare global {
   interface Window {
     adsbygoogle?: unknown[];
@@ -13,16 +10,20 @@ declare global {
 }
 
 interface AdSlotProps {
+  /** AdSense `data-ad-slot` value. */
   slot: string;
   format?: "auto" | "rectangle" | "horizontal";
   className?: string;
+  /** Accessible name for the ad region (e.g. “Bottom banner”). */
+  name: string;
 }
 
-export function AdSlot({ slot, format = "auto", className }: AdSlotProps) {
-  const usePlaceholder = DEMO_AD_SLOTS.has(slot);
+export function AdSlot({ slot, format = "auto", className, name }: AdSlotProps) {
+  const trimmed = slot.trim();
+  const ready = trimmed.length > 0;
 
   useEffect(() => {
-    if (usePlaceholder) {
+    if (!ready) {
       return;
     }
     try {
@@ -31,26 +32,29 @@ export function AdSlot({ slot, format = "auto", className }: AdSlotProps) {
     } catch {
       // Ignore ad init failures in development environments.
     }
-  }, [usePlaceholder, slot]);
+  }, [ready, trimmed]);
 
-  if (usePlaceholder) {
+  if (!ready) {
     return (
-      <div
+      <aside
+        aria-label={name}
         className={`flex min-h-24 items-center justify-center rounded-lg border border-dashed border-border bg-muted/30 px-4 py-6 text-xs text-muted-foreground ${className ?? ""}`}
       >
-        Ad slot placeholder ({slot})
-      </div>
+        <span className="text-center">Ad slot not configured — set <code className="text-[0.8rem]">NEXT_PUBLIC_AD_SLOT_*</code></span>
+      </aside>
     );
   }
 
   return (
-    <ins
-      className="adsbygoogle"
-      style={{ display: "block", minHeight: "96px" }}
-      data-ad-client={ADSENSE_CLIENT_ID}
-      data-ad-slot={slot}
-      data-ad-format={format}
-      data-full-width-responsive="true"
-    />
+    <aside aria-label={name} className={className}>
+      <ins
+        className="adsbygoogle"
+        style={{ display: "block", minHeight: "96px" }}
+        data-ad-client={ADSENSE_CLIENT_ID}
+        data-ad-slot={trimmed}
+        data-ad-format={format}
+        data-full-width-responsive="true"
+      />
+    </aside>
   );
 }
