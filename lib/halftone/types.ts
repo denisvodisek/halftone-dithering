@@ -9,10 +9,14 @@ export type DitherType =
 
 export type SourceType = "image" | "video";
 
+/** Geometry of each halftone mark (size still driven by cell brightness). */
+export type MarkShape = "Circle" | "Square" | "Triangle" | "Diamond" | "Plus";
+
 export const DEFAULT_MULTICOLOR_PALETTE = ["#e63946", "#f4a261", "#2a9d8f", "#264653", "#e9c46a"];
 
 export interface HalftoneSettings {
   gridSize: number;
+  markShape: MarkShape;
   brightness: number;
   contrast: number;
   gamma: number;
@@ -43,6 +47,7 @@ export interface SavedPreset {
 
 export const DEFAULT_SETTINGS: HalftoneSettings = {
   gridSize: 20,
+  markShape: "Circle",
   brightness: 20,
   contrast: 0,
   gamma: 1,
@@ -59,6 +64,9 @@ export function normalizeHalftoneSettings(partial: Partial<HalftoneSettings>): H
   const merged = { ...DEFAULT_SETTINGS, ...partial };
   if (!merged.multicolorPalette?.length) {
     merged.multicolorPalette = [...DEFAULT_MULTICOLOR_PALETTE];
+  }
+  if (!merged.markShape) {
+    merged.markShape = "Circle";
   }
   return merged;
 }

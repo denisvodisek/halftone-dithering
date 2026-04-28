@@ -1,4 +1,5 @@
 import { applyDithering } from "@/lib/halftone/ditherers";
+import { fillHalftoneMark, svgHalftoneMark } from "@/lib/halftone/mark-shapes";
 import { colorFromPalette } from "@/lib/halftone/palette";
 import type { HalftoneRenderResult, HalftoneSettings } from "@/lib/halftone/types";
 
@@ -178,10 +179,7 @@ export function drawHalftone({
       }
       const centerX = col * grid + grid / 2;
       const centerY = row * grid + grid / 2;
-      ctx.beginPath();
-      ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
-      ctx.fillStyle = getDotColor(settings, brightnessValue);
-      ctx.fill();
+      fillHalftoneMark(ctx, settings.markShape, centerX, centerY, radius, getDotColor(settings, brightnessValue));
     }
   }
 
@@ -217,7 +215,7 @@ export function generateSvg(
       const color = settings.multicolor
         ? colorFromPalette(brightnessValue / 255, settings.multicolorPalette)
         : settings.dotColor;
-      svg += `<circle cx="${centerX}" cy="${centerY}" r="${radius}" fill="${color}" />`;
+      svg += svgHalftoneMark(settings.markShape, centerX, centerY, radius, color);
     }
   }
 

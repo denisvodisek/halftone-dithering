@@ -8,7 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Slider } from "@/components/ui/slider";
 import { Switch } from "@/components/ui/switch";
-import type { DitherType, HalftoneSettings } from "@/lib/halftone/types";
+import type { DitherType, HalftoneSettings, MarkShape } from "@/lib/halftone/types";
 
 interface ControlPanelProps {
   settings: HalftoneSettings;
@@ -22,6 +22,14 @@ interface ControlPanelProps {
   isVideo: boolean;
   isRecordingVideo: boolean;
 }
+
+const MARK_SHAPE_OPTIONS: Array<{ label: string; value: MarkShape }> = [
+  { label: "Circle", value: "Circle" },
+  { label: "Square", value: "Square" },
+  { label: "Triangle", value: "Triangle" },
+  { label: "Diamond", value: "Diamond" },
+  { label: "Plus (+)", value: "Plus" },
+];
 
 const DITHER_OPTIONS: Array<{ label: string; value: DitherType }> = [
   { label: "Jarvis-Judice-Ninke", value: "JarvisJudiceNinke" },
@@ -94,6 +102,24 @@ export function ControlPanel({
             max={50}
             onChange={(value) => setSettings((prev) => ({ ...prev, gridSize: value }))}
           />
+          <div className="space-y-2">
+            <Label htmlFor="markShape">Mark shape</Label>
+            <Select
+              value={settings.markShape}
+              onValueChange={(value) => setSettings((prev) => ({ ...prev, markShape: value as MarkShape }))}
+            >
+              <SelectTrigger id="markShape">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                {MARK_SHAPE_OPTIONS.map((opt) => (
+                  <SelectItem key={opt.value} value={opt.value}>
+                    {opt.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
         </section>
 
         <section className="space-y-3">
