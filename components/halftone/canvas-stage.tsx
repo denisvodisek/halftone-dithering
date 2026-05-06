@@ -56,7 +56,10 @@ export function CanvasStage({
 
   return (
     <div className="space-y-3">
-      <div ref={stageRef} className="relative overflow-hidden rounded-xl border border-border bg-card">
+      <div
+        ref={stageRef}
+        className="relative overflow-hidden rounded-lg border border-border bg-card"
+      >
         <canvas ref={originalCanvasRef} className="h-auto w-full" />
         <canvas
           ref={halftoneCanvasRef}
@@ -81,7 +84,7 @@ export function CanvasStage({
         </div>
       </div>
       <div className="space-y-1">
-        <p className="text-xs text-muted-foreground">
+        <p className="text-xs font-medium text-muted-foreground">
           Split: {Math.round(splitPercent)}% halftone / {Math.round(100 - splitPercent)}% original — drag the line on the
           preview or use the slider.
         </p>

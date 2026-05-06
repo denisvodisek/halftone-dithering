@@ -101,33 +101,37 @@ export default function HomePage() {
     <SiteShell>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
-      <section className="space-y-4" aria-labelledby="intro-heading">
-        <h2 id="intro-heading" className="max-w-3xl text-pretty text-lg font-semibold leading-snug tracking-tight sm:text-xl">
-          Turn photos and video into halftone dot art — free in your browser
-        </h2>
-        <div className="max-w-3xl space-y-3 text-pretty text-sm leading-relaxed text-muted-foreground sm:text-base">
-          <p>
-            <strong className="font-medium text-foreground">Halftone Dithering FX</strong> is an online halftone
-            generator and image dithering tool. Upload a picture or MP4/WebM clip, set your dot grid, brightness, and
-            contrast, then choose classic{" "}
-            <span className="text-foreground/90">error-diffusion</span> modes — Floyd–Steinberg, Jarvis–Judice–Ninke,
-            Stucki, or Burkes — or switch to <span className="text-foreground/90">ordered</span> and{" "}
-            <span className="text-foreground/90">noise</span> dither for a print or comic look.
-          </p>
-          <p>
-            Compare before and after with a <span className="text-foreground/90">draggable split line</span> on the
-            preview, save looks as local presets, and export production-ready{" "}
-            <span className="text-foreground/90">PNG</span>, scalable <span className="text-foreground/90">SVG</span>{" "}
-            halftone dots, or <span className="text-foreground/90">WebM</span> when you are processing motion — no
-            account required.
-          </p>
-        </div>
-      </section>
-      <HalftoneWorkbench />
-      <AdSlot
-        name="Bottom banner ad"
-        slot={process.env.NEXT_PUBLIC_AD_SLOT_INLINE ?? ADSENSE_SLOT_BOTTOM_BANNER}
-      />
+      <div className="space-y-6">
+        <section className="border-l-2 border-primary/70 pl-5" aria-labelledby="intro-heading">
+          <div className="space-y-4">
+            <h2
+              id="intro-heading"
+              className="max-w-3xl text-pretty text-lg font-semibold leading-snug tracking-tight sm:text-xl"
+            >
+              Turn photos and video into halftone dot art — free in your browser
+            </h2>
+            <div className="max-w-3xl space-y-3 text-pretty text-sm leading-relaxed text-muted-foreground sm:text-base">
+              <p>
+                <strong className="font-medium text-foreground">Halftone Dithering FX</strong> is an online halftone
+                generator and image dithering tool. Upload a picture or MP4/WebM clip, set your dot grid, brightness,
+                and contrast, then choose classic{" "}
+                <span className="text-foreground/90">error-diffusion</span> modes — Floyd–Steinberg,
+                Jarvis–Judice–Ninke, Stucki, or Burkes — or switch to <span className="text-foreground/90">ordered</span>{" "}
+                and <span className="text-foreground/90">noise</span> dither for a print or comic look.
+              </p>
+              <p>
+                Compare before and after with a <span className="text-foreground/90">draggable split line</span> on the
+                preview, save looks as local presets, and export production-ready{" "}
+                <span className="text-foreground/90">PNG</span>, scalable <span className="text-foreground/90">SVG</span>{" "}
+                halftone dots, or <span className="text-foreground/90">WebM</span> when you are processing motion — no
+                account required.
+              </p>
+            </div>
+          </div>
+        </section>
+        <HalftoneWorkbench />
+      </div>
+      <AdSlot name="Bottom banner ad" slot={process.env.NEXT_PUBLIC_AD_SLOT_INLINE ?? ADSENSE_SLOT_BOTTOM_BANNER} />
       <GuidesSection />
     </SiteShell>
   );

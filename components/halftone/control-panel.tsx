@@ -83,17 +83,27 @@ export function ControlPanel({
 }: ControlPanelProps) {
   return (
     <Card>
-      <CardHeader>
-        <CardTitle>Controls</CardTitle>
-      </CardHeader>
-      <CardContent className="space-y-5">
-        <div className="space-y-2">
-          <Label htmlFor="fileUpload">Upload Image / Video</Label>
-          <Input id="fileUpload" type="file" accept="image/*,video/*" onChange={onUpload} />
+      <CardHeader className="border-b border-border pb-4">
+        <div className="space-y-1">
+          <p className="text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-muted-foreground">Operator Panel</p>
+          <CardTitle className="text-xl">Controls</CardTitle>
         </div>
-
+      </CardHeader>
+      <CardContent className="space-y-5 p-4">
         <section className="space-y-3">
-          <h3 className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">Primary</h3>
+          <div className="space-y-1">
+            <h3 className="text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-muted-foreground">Source</h3>
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="fileUpload">Upload Image / Video</Label>
+            <Input id="fileUpload" type="file" accept="image/*,video/*" onChange={onUpload} />
+          </div>
+        </section>
+
+        <section className="space-y-3 border-t border-border pt-4">
+          <div className="space-y-1">
+            <h3 className="text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-muted-foreground">Primary</h3>
+          </div>
           <SliderField
             id="gridSize"
             label="Grid Size"
@@ -122,8 +132,10 @@ export function ControlPanel({
           </div>
         </section>
 
-        <section className="space-y-3">
-          <h3 className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">Image Adjustments</h3>
+        <section className="space-y-3 border-t border-border pt-4">
+          <div className="space-y-1">
+            <h3 className="text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-muted-foreground">Image Adjustments</h3>
+          </div>
           <SliderField
             id="brightness"
             label="Brightness"
@@ -160,8 +172,10 @@ export function ControlPanel({
           />
         </section>
 
-        <section className="space-y-2">
-          <h3 className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">Dithering</h3>
+        <section className="space-y-2 border-t border-border pt-4">
+          <div className="space-y-1">
+            <h3 className="text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-muted-foreground">Dithering</h3>
+          </div>
           <Select
             value={settings.ditherType}
             onValueChange={(value) => setSettings((prev) => ({ ...prev, ditherType: value as DitherType }))}
@@ -179,8 +193,10 @@ export function ControlPanel({
           </Select>
         </section>
 
-        <section className="space-y-3">
-          <h3 className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">Coloring</h3>
+        <section className="space-y-3 border-t border-border pt-4">
+          <div className="space-y-1">
+            <h3 className="text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-muted-foreground">Coloring</h3>
+          </div>
           <div className="grid grid-cols-2 gap-3">
             <div className="space-y-2">
               <Label htmlFor="backgroundColor">Background</Label>
@@ -202,7 +218,7 @@ export function ControlPanel({
               />
             </div>
           </div>
-          <div className="flex items-center justify-between rounded-md border border-border px-3 py-2">
+          <div className="flex items-center justify-between rounded-md border border-border px-3 py-2.5">
             <Label htmlFor="multicolor">Multicolor Dots</Label>
             <Switch
               id="multicolor"
@@ -221,7 +237,7 @@ export function ControlPanel({
           </div>
           {settings.multicolor ? (
             <div className="space-y-2 rounded-md border border-border bg-muted/20 p-3">
-              <p className="text-xs text-muted-foreground">
+              <p className="text-xs leading-4 text-muted-foreground">
                 Colors run from dark regions → light. Reorder stops to change how the gradient maps across the image.
               </p>
               <div className="flex max-h-40 flex-col gap-2 overflow-y-auto pr-1">
@@ -317,7 +333,7 @@ export function ControlPanel({
           ) : null}
         </section>
 
-        <div className="grid grid-cols-2 gap-2">
+        <div className="grid grid-cols-2 gap-2 border-t border-border pt-4">
           <Button onClick={onExportPng}>Export PNG</Button>
           <Button onClick={onExportSvg}>Export SVG</Button>
           {isVideo ? (

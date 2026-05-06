@@ -397,57 +397,59 @@ export function HalftoneWorkbench() {
   };
 
   return (
-    <div className="grid grid-cols-1 gap-6 xl:grid-cols-[420px_1fr] xl:items-start">
-      <div className="space-y-6 xl:sticky xl:top-6 xl:z-10 xl:max-h-[min(100vh-1.5rem,1200px)] xl:overflow-y-auto xl:overflow-x-hidden xl:pr-1 xl:pb-8">
-        <ControlPanel
-          settings={settings}
-          setSettings={setSettings}
-          onUpload={handleUpload}
-          onReset={() => setSettings(DEFAULT_SETTINGS)}
-          onExportPng={exportPng}
-          onExportSvg={exportSvg}
-          onStartVideoExport={startVideoExport}
-          onStopVideoExport={stopVideoExport}
-          isVideo={sourceType === "video"}
-          isRecordingVideo={isRecordingVideo}
-        />
-        <Card className="shrink-0">
-          <CardHeader>
-            <CardTitle>Presets</CardTitle>
-            <CardDescription>Built-in looks and configs saved in this browser.</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <PresetBar
-              savedPresets={savedPresets}
-              presetName={presetName}
-              onPresetNameChange={setPresetName}
-              onSavePreset={handleSavePreset}
-              onApplySettings={(next) => {
-                setSettings(normalizeHalftoneSettings(next));
-                trackEvent("apply_template");
-              }}
-              onDeletePreset={handleDeletePreset}
-            />
-          </CardContent>
-        </Card>
-      </div>
+    <section className="halftone-workbench-shell rounded-lg border border-border bg-background/40 p-4 md:p-5">
+      <div className="grid grid-cols-1 gap-5 xl:grid-cols-[420px_minmax(0,1fr)] xl:items-start xl:gap-6">
+        <div className="space-y-6">
+          <ControlPanel
+            settings={settings}
+            setSettings={setSettings}
+            onUpload={handleUpload}
+            onReset={() => setSettings(DEFAULT_SETTINGS)}
+            onExportPng={exportPng}
+            onExportSvg={exportSvg}
+            onStartVideoExport={startVideoExport}
+            onStopVideoExport={stopVideoExport}
+            isVideo={sourceType === "video"}
+            isRecordingVideo={isRecordingVideo}
+          />
+          <Card className="shrink-0">
+            <CardHeader>
+              <CardTitle>Presets</CardTitle>
+              <CardDescription>Built-in looks and configs saved in this browser.</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <PresetBar
+                savedPresets={savedPresets}
+                presetName={presetName}
+                onPresetNameChange={setPresetName}
+                onSavePreset={handleSavePreset}
+                onApplySettings={(next) => {
+                  setSettings(normalizeHalftoneSettings(next));
+                  trackEvent("apply_template");
+                }}
+                onDeletePreset={handleDeletePreset}
+              />
+            </CardContent>
+          </Card>
+        </div>
 
-      <div className="space-y-6">
-        <Card>
-          <CardHeader>
-            <CardTitle>Split View Inspector</CardTitle>
-            <CardDescription>Compare original media with processed halftone output in real-time.</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <CanvasStage
-              originalCanvasRef={originalCanvasRef}
-              halftoneCanvasRef={halftoneCanvasRef}
-              splitPercent={splitPercent}
-              onSplitChange={setSplitPercent}
-            />
-          </CardContent>
-        </Card>
+        <div className="xl:sticky xl:top-6 xl:self-start">
+          <Card>
+            <CardHeader>
+              <CardTitle>Split View Inspector</CardTitle>
+              <CardDescription>Compare original media with processed halftone output in real-time.</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <CanvasStage
+                originalCanvasRef={originalCanvasRef}
+                halftoneCanvasRef={halftoneCanvasRef}
+                splitPercent={splitPercent}
+                onSplitChange={setSplitPercent}
+              />
+            </CardContent>
+          </Card>
+        </div>
       </div>
-    </div>
+    </section>
   );
 }

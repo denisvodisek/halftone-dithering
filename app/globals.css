@@ -123,6 +123,8 @@
   }
   body {
     @apply bg-background text-foreground;
+    min-height: 100dvh;
+    overflow-x: hidden;
   }
   button:not(:disabled), [role="button"]:not(:disabled) {
     cursor: pointer;
@@ -130,4 +132,9 @@
   html {
     @apply font-mono;
   }
+}
+
+.halftone-workbench-shell {
+  position: relative;
+  box-shadow: 0 18px 50px -42px rgba(0, 0, 0, 0.45);
 }
