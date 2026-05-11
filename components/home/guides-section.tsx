@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { guides } from "@/lib/content/guides";
 
 export function GuidesSection() {
@@ -16,13 +17,23 @@ export function GuidesSection() {
       <div className="mt-10 space-y-10">
         {guides.map((guide) => (
           <article key={guide.slug} className="max-w-3xl border-l-2 border-primary/30 pl-5">
-            <h3 className="text-base font-semibold tracking-tight">{guide.title}</h3>
+            <h3 className="text-base font-semibold tracking-tight">
+              <Link href={`/guides/${guide.slug}`} className="underline-offset-4 hover:underline">
+                {guide.title}
+              </Link>
+            </h3>
             <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{guide.description}</p>
             <ul className="mt-4 list-inside list-disc space-y-2 text-sm leading-relaxed text-foreground/95">
               {guide.body.map((line) => (
                 <li key={line}>{line}</li>
               ))}
             </ul>
+            <Link
+              href={`/guides/${guide.slug}`}
+              className="mt-4 inline-flex text-sm font-medium text-foreground underline underline-offset-4"
+            >
+              Read the full guide
+            </Link>
           </article>
         ))}
       </div>
