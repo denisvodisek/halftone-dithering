@@ -131,8 +131,8 @@ export default function HomePage() {
         </section>
         <HalftoneWorkbench />
       </div>
-      <AdSlot name="Bottom banner ad" slot={process.env.NEXT_PUBLIC_AD_SLOT_INLINE ?? ADSENSE_SLOT_BOTTOM_BANNER} />
       <GuidesSection />
+      <AdSlot name="Bottom banner ad" slot={process.env.NEXT_PUBLIC_AD_SLOT_INLINE ?? ADSENSE_SLOT_BOTTOM_BANNER} />
     </SiteShell>
   );
 }
