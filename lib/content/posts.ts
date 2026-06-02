@@ -582,6 +582,363 @@ export const posts: Post[] = [
     related: ["risograph-effect-online", "comic-book-halftone-ben-day-dots"],
     guides: ["halftone-for-print-dpi-and-svg-export"],
   },
+  {
+    slug: "how-to-make-a-halftone-effect-in-gimp",
+    title: "How to Make a Halftone Effect in GIMP (and a Faster Way)",
+    description:
+      "GIMP can do halftone with its Newsprint filter. Here's how, where it gets fiddly, and when it's quicker to skip it.",
+    updatedAt: "2026-06-04",
+    category: "How-to",
+    keywords: ["gimp halftone", "gimp newsprint filter", "halftone in gimp", "gimp dot effect"],
+    content: [
+      {
+        type: "paragraph",
+        lead: true,
+        text: "GIMP is free, which makes it the go-to when you don't want to pay for Photoshop. It can produce a halftone, but the feature is buried and not obvious if you don't already know its name. Here's the real process, plus an honest note on when it's not worth the trouble.",
+      },
+      { type: "heading", text: "The filter you're looking for is Newsprint" },
+      {
+        type: "paragraph",
+        text: "GIMP doesn't call it halftone. The relevant filter is Filters > Distorts > Newsprint. It converts your image into a dot screen and lets you set the cell size, the dot shape, and the screen angle. If you've ever wondered why searching 'GIMP halftone' turns up nothing useful, this is why — it's hiding under a different name.",
+      },
+      { type: "heading", text: "Step by step" },
+      {
+        type: "list",
+        items: [
+          "Open your image and, if you want a mono look, desaturate it first (Colors > Desaturate).",
+          "Boost contrast with Colors > Brightness-Contrast so the dots have something to work with.",
+          "Open Filters > Distorts > Newsprint.",
+          "Set the cell size — this is your dot size. Bigger cells, bigger dots.",
+          "Choose a spot shape (circle is the classic) and adjust the angle if you want.",
+          "Flatten and export as PNG.",
+        ],
+      },
+      { ...CTA_DEFAULT },
+      { type: "heading", text: "Where it gets fiddly" },
+      {
+        type: "paragraph",
+        text: "Two things slow you down in GIMP. First, there's no quick before-and-after, so you're applying, undoing, and reapplying to compare settings. Second, Newsprint outputs raster pixels, so if you later need the dots bigger for print, you're stuck re-rendering rather than scaling cleanly. For colour halftones you also have to manage channels yourself, which gets technical fast.",
+      },
+      { type: "heading", text: "When to skip it" },
+      {
+        type: "paragraph",
+        text: "If you just need a halftone for a post or a poster and you don't already live in GIMP, a browser tool gets you there faster. You see the dots change as you drag, and you can export SVG so the dots stay crisp at any size. GIMP makes more sense when the halftone is one step inside a bigger edit you're already doing there.",
+      },
+    ],
+    faq: [
+      {
+        question: "Does GIMP have a halftone filter?",
+        answer:
+          "Yes, but it's called Newsprint, found under Filters > Distorts > Newsprint. It converts an image into a halftone dot screen with adjustable cell size, dot shape, and angle.",
+      },
+      {
+        question: "Why can't I find halftone in GIMP?",
+        answer:
+          "Because GIMP names the feature 'Newsprint' rather than 'halftone.' Look under Filters > Distorts > Newsprint.",
+      },
+      {
+        question: "Is GIMP or an online tool better for halftone?",
+        answer:
+          "GIMP works well if you're already editing there, but it has no live preview and exports raster only. An online halftone tool is faster for one-off effects and can export scalable SVG dots for print.",
+      },
+    ],
+    related: ["how-to-make-a-halftone-effect-without-photoshop", "newspaper-photo-effect"],
+    guides: ["best-halftone-settings-for-portraits"],
+  },
+  {
+    slug: "halftone-effect-in-procreate",
+    title: "Halftone Effect in Procreate: What Works and What Doesn't",
+    description:
+      "Procreate has halftone built into its brushes and filters, but it has real limits. Here's what's possible and the workaround.",
+    updatedAt: "2026-06-04",
+    category: "How-to",
+    keywords: ["procreate halftone", "halftone procreate", "procreate dot effect", "halftone ipad"],
+    content: [
+      {
+        type: "paragraph",
+        lead: true,
+        text: "Procreate is brilliant for drawing, and a lot of illustrators want their finished piece to have that printed, dotty texture. The good news: Procreate can do halftone. The catch: it's better at adding halftone texture to art you're drawing than at converting an existing photo into clean dots.",
+      },
+      { type: "heading", text: "The built-in route: Halftone in Adjustments" },
+      {
+        type: "paragraph",
+        text: "Procreate has a Halftone option under Adjustments. Open Adjustments, choose Halftone, and pick Full Color, Screen Print, or Newspaper. Drag left and right to set the intensity. It's quick and it lives right inside your canvas, which is the main reason to use it.",
+      },
+      {
+        type: "list",
+        items: [
+          "Adjustments > Halftone, then pick a mode.",
+          "Full Color keeps a CMYK-style dot look.",
+          "Newspaper gives a mono dot screen.",
+          "Drag to set the dot scale, then tap Apply.",
+        ],
+      },
+      { ...CTA_DEFAULT },
+      { type: "heading", text: "Where Procreate falls short" },
+      {
+        type: "paragraph",
+        text: "The control is coarse. You're dragging for intensity with limited say over exact dot size, the dither method, or how contrast maps to the dots. For a textured overlay on an illustration that's fine. For converting a photo into a precise, repeatable halftone — the kind you'd put on merch or want to match across a series — it's frustrating. And everything stays raster, so scaling up for print softens the dots.",
+      },
+      { type: "heading", text: "A clean workaround" },
+      {
+        type: "paragraph",
+        text: "When you need precision, take the image out of Procreate, run it through a dedicated halftone tool where you can dial in the exact dot size and algorithm, then bring the result back in as a layer if you want to keep painting on top. You get tight control over the dots and an SVG export for anything headed to print, without giving up your Procreate workflow.",
+      },
+    ],
+    faq: [
+      {
+        question: "Does Procreate have a halftone effect?",
+        answer:
+          "Yes. Procreate has a Halftone option under Adjustments with Full Color, Screen Print, and Newspaper modes. You drag to set the intensity, then apply it to your layer.",
+      },
+      {
+        question: "Why does Procreate halftone look low quality when I scale it?",
+        answer:
+          "Procreate's halftone is raster, so enlarging it past the canvas resolution softens the dots. For print, generate the halftone as scalable SVG in a dedicated tool instead.",
+      },
+      {
+        question: "Can I convert a photo to halftone in Procreate?",
+        answer:
+          "You can, but the controls are coarse and aimed at adding texture rather than precise conversion. A dedicated halftone tool gives finer control over dot size and algorithm.",
+      },
+    ],
+    related: ["how-to-make-a-halftone-effect-without-photoshop", "halftone-for-screen-printing"],
+    guides: ["halftone-for-print-dpi-and-svg-export"],
+  },
+  {
+    slug: "halftone-effect-in-figma",
+    title: "How to Get a Halftone Effect in Figma",
+    description:
+      "Figma has no native halftone filter. Here are the realistic options for getting dotted artwork into your Figma file.",
+    updatedAt: "2026-06-04",
+    category: "How-to",
+    keywords: ["figma halftone", "halftone in figma", "figma dot effect", "figma image effects"],
+    content: [
+      {
+        type: "paragraph",
+        lead: true,
+        text: "Short answer: Figma can't make a halftone on its own. There's no built-in halftone or dither filter, and the image adjustments are limited to exposure, contrast, and a few basics. So if you want dotted artwork in a Figma file, you bring it in from somewhere else. Here's how to do that cleanly.",
+      },
+      { type: "heading", text: "Option 1: Make it elsewhere, paste it in" },
+      {
+        type: "paragraph",
+        text: "The simplest path. Convert your image to halftone in a browser tool, export it, and drop it into Figma. Export PNG if it's sitting at a fixed size in a mockup. If you want it to stay crisp when it's scaled — a hero image, a large banner, an icon — export SVG and paste the vector so Figma keeps the dots sharp at any size.",
+      },
+      { ...CTA_DEFAULT },
+      { type: "heading", text: "Option 2: Plugins" },
+      {
+        type: "paragraph",
+        text: "There are community plugins that attempt halftone and dithering inside Figma. They can work for quick experiments, but they vary in quality, they often rasterise the result, and a heavy dot pattern can bog the canvas down. If you need reliable, repeatable output, generating it outside Figma and importing it is the steadier choice.",
+      },
+      { type: "heading", text: "Why SVG is the move for UI work" },
+      {
+        type: "paragraph",
+        text: "Figma is a vector tool, so vector halftone fits it naturally. An SVG of dots scales perfectly across breakpoints, can be recoloured with Figma's fill controls, and exports cleanly into a build. For a design system or a marketing site, that flexibility beats a flattened PNG every time.",
+      },
+    ],
+    faq: [
+      {
+        question: "Does Figma have a halftone filter?",
+        answer:
+          "No. Figma has no native halftone or dithering filter. You create the halftone in another tool and import it, or use a community plugin.",
+      },
+      {
+        question: "How do I add a halftone image to Figma?",
+        answer:
+          "Convert your image to halftone in a browser tool, then export and place it in Figma. Use SVG so the dots scale and recolour cleanly, or PNG for a fixed-size mockup.",
+      },
+      {
+        question: "Should I use a Figma plugin for halftone?",
+        answer:
+          "Plugins are fine for quick tests but vary in quality and often rasterise the output. For reliable, scalable results, generate the halftone externally and import it as SVG.",
+      },
+    ],
+    related: ["how-to-make-a-halftone-effect-without-photoshop", "halftone-effect-in-procreate"],
+    guides: ["halftone-for-print-dpi-and-svg-export"],
+  },
+  {
+    slug: "newspaper-photo-effect",
+    title: "How to Make a Newspaper Photo Effect",
+    description:
+      "That gritty old-print look from a photo: the dot screen, the contrast, and the small imperfections that sell it.",
+    updatedAt: "2026-06-04",
+    category: "Style",
+    keywords: ["newspaper photo effect", "newsprint effect", "old newspaper filter", "halftone newspaper"],
+    content: [
+      {
+        type: "paragraph",
+        lead: true,
+        text: "The newspaper look is one of the most recognisable print effects there is: a coarse dot screen, hard contrast, and that slightly rough, inked-on-cheap-paper feel. It's built on halftone, and the trick to making it convincing is leaning into the imperfection instead of fighting it.",
+      },
+      { type: "heading", text: "Start in black and white" },
+      {
+        type: "paragraph",
+        text: "Old newsprint was mostly mono. Desaturate first, or use a near-monochrome palette. Colour newspaper printing existed, but the classic look people picture is grey ink on off-white paper, so that's the target.",
+      },
+      { type: "heading", text: "The settings that read as newsprint" },
+      {
+        type: "list",
+        items: [
+          "A tight-to-medium dot grid — newsprint dots are small but clearly there.",
+          "High contrast so shadows clump into dots and highlights stay open.",
+          "Floyd–Steinberg or Burkes for a natural, photographic break-up.",
+          "Keep backgrounds simple so the screen doesn't fight the subject.",
+        ],
+      },
+      { ...CTA_DEFAULT },
+      { type: "heading", text: "Don't make it too clean" },
+      {
+        type: "paragraph",
+        text: "This is the part people get wrong. Real newspaper printing was cheap and slightly off — ink spread, registration drifted, paper soaked it up. A flawless, perfectly smooth result reads as digital. Let the midtones break into dots, let the shadows clog a little, and resist the urge to smooth everything. The roughness is the whole point.",
+      },
+      { type: "heading", text: "Finishing touches" },
+      {
+        type: "paragraph",
+        text: "For an authentic feel, pair the halftone with an off-white or warm-grey background rather than pure white, and keep your type bold and condensed if you're adding headlines. Export PNG for digital use, or SVG if it's going into a real print layout.",
+      },
+    ],
+    faq: [
+      {
+        question: "How do I make a photo look like a newspaper print?",
+        answer:
+          "Desaturate the image, push contrast, and apply a tight halftone dot screen with an error-diffusion algorithm like Floyd–Steinberg. Keep it slightly rough and use an off-white background for an authentic feel.",
+      },
+      {
+        question: "What is the newspaper dot effect called?",
+        answer:
+          "It's a halftone, sometimes called a newsprint screen. Newspapers used halftone dots to reproduce photos with a single grey or black ink.",
+      },
+      {
+        question: "Should a newspaper effect be color or black and white?",
+        answer:
+          "Black and white, or near-monochrome, gives the classic newsprint look. The recognisable style is grey ink on off-white paper.",
+      },
+    ],
+    related: ["comic-book-halftone-ben-day-dots", "risograph-effect-online"],
+    guides: ["newspaper-vs-comic-dithering"],
+  },
+  {
+    slug: "duotone-halftone-effect",
+    title: "How to Make a Duotone Halftone Effect",
+    description:
+      "Combine two-colour duotone with a dot screen for a bold, modern print look. Picking colours and keeping it readable.",
+    updatedAt: "2026-06-04",
+    category: "Style",
+    keywords: ["duotone halftone", "duotone effect", "two color halftone", "duotone dot effect"],
+    content: [
+      {
+        type: "paragraph",
+        lead: true,
+        text: "Duotone maps an image to two colours — one for the shadows, one for the highlights. Add a halftone dot screen on top and you get a look that feels both modern and printed: think Spotify covers, festival posters, and bold editorial spreads. Here's how to build it.",
+      },
+      { type: "heading", text: "How duotone and halftone fit together" },
+      {
+        type: "paragraph",
+        text: "On their own, duotone gives you the colour story and halftone gives you the texture. Together, the dots carry the transition between your two colours, which is what makes it look printed rather than like a flat photo filter. The image stops being a photograph and becomes a piece of graphic design.",
+      },
+      { type: "heading", text: "Choosing your two colours" },
+      {
+        type: "list",
+        items: [
+          "Pick a dark shadow colour and a light highlight colour with clear contrast between them.",
+          "High contrast between the two keeps the image readable.",
+          "Unexpected pairings (e.g. deep purple and acid yellow) read as deliberate and modern.",
+          "Tints of a single hue give a subtler, more photographic duotone.",
+        ],
+      },
+      { ...CTA_DEFAULT },
+      { type: "heading", text: "Keep the subject readable" },
+      {
+        type: "paragraph",
+        text: "The risk with duotone halftone is mush. If your two colours are too close in brightness, the subject disappears. Push contrast in the source image first so there's a clear separation between light and dark, then apply the colours. The face or focal point should still be obvious at a glance.",
+      },
+      { type: "heading", text: "Where it shines" },
+      {
+        type: "paragraph",
+        text: "Duotone halftone works beautifully on posters, playlist and album art, event branding, and hero images that need to feel designed. Export SVG if it's going large or to print so the dots and colours stay crisp; PNG is fine for screens.",
+      },
+    ],
+    faq: [
+      {
+        question: "What is a duotone halftone effect?",
+        answer:
+          "It's an image mapped to two colours (duotone) with a halftone dot screen applied, so the dots carry the transition between the colours. The result looks like a bold, modern print.",
+      },
+      {
+        question: "How do I choose colours for a duotone?",
+        answer:
+          "Pick a dark colour for shadows and a light one for highlights, with enough contrast between them to keep the image readable. Unexpected pairings look modern; tints of one hue look subtler.",
+      },
+      {
+        question: "Why does my duotone look muddy?",
+        answer:
+          "Usually the two colours are too close in brightness, or the source image lacks contrast. Increase contrast before applying the colours so the subject stays clearly separated.",
+      },
+    ],
+    related: ["pop-art-halftone-effect", "risograph-effect-online"],
+    guides: ["best-halftone-settings-for-portraits"],
+  },
+  {
+    slug: "dithering-for-pixel-art",
+    title: "Dithering for Pixel Art and Retro Game Looks",
+    description:
+      "How dithering creates shading and gradients in pixel art with a tiny palette, and how to use it without making mud.",
+    updatedAt: "2026-06-04",
+    category: "Style",
+    keywords: ["dithering pixel art", "pixel art dithering", "retro game dithering", "8 bit dithering"],
+    content: [
+      {
+        type: "paragraph",
+        lead: true,
+        text: "Dithering and pixel art grew up together. When a game console could only show a handful of colours, artists scattered the colours they had to fake shading and gradients. That speckled texture is now a deliberate style, and getting it right is about restraint as much as technique.",
+      },
+      { type: "heading", text: "Why pixel art needs dithering" },
+      {
+        type: "paragraph",
+        text: "With a tiny palette, a smooth gradient isn't possible — you'd see hard bands where one colour stops and the next begins. Dithering breaks up those bands by mixing pixels from two colours along the transition, so your eye reads a gradient that the palette can't actually produce. It's the same trick newspapers use, just at the scale of individual pixels.",
+      },
+      { type: "heading", text: "Ordered dithering is your friend here" },
+      {
+        type: "paragraph",
+        text: "For the authentic retro look, ordered (Bayer) dithering usually beats error diffusion. Its regular, repeating pattern matches how old hardware actually did it and reads as intentional. Error diffusion can look too organic and noisy for a clean pixel-art piece, though it has its uses for more painterly work.",
+      },
+      { ...CTA_DEFAULT },
+      { type: "heading", text: "Keep it deliberate, not noisy" },
+      {
+        type: "list",
+        items: [
+          "Use a small, fixed palette — the constraint is the style.",
+          "Apply dithering in the transitions between tones, not across the whole image.",
+          "Keep the dot/pixel scale consistent so it reads as one piece.",
+          "Zoom out to check it — dithering that looks busy up close often reads perfectly at normal size.",
+        ],
+      },
+      { type: "heading", text: "Export at the right size" },
+      {
+        type: "paragraph",
+        text: "Pixel art is resolution-sensitive. Export at the exact pixel dimensions you'll display, and scale up by whole numbers (2x, 3x, 4x) with nearest-neighbour so the pixels stay sharp and square. Scaling by odd amounts or with smoothing turns crisp dithering into a blurry mess.",
+      },
+    ],
+    faq: [
+      {
+        question: "What is dithering in pixel art?",
+        answer:
+          "It's the technique of mixing pixels from a small palette to fake shading and gradients that the limited colours can't produce on their own. It creates the recognisable speckled retro-game texture.",
+      },
+      {
+        question: "What dithering is best for pixel art?",
+        answer:
+          "Ordered (Bayer) dithering usually gives the most authentic retro look because its regular pattern matches how old hardware worked. Error diffusion can look too noisy for clean pixel art.",
+      },
+      {
+        question: "How do I keep dithered pixel art sharp when scaling?",
+        answer:
+          "Export at the exact pixel size, then scale up by whole-number multiples (2x, 3x) using nearest-neighbour. Avoid smoothing or fractional scaling, which blurs the pixels.",
+      },
+    ],
+    related: ["what-is-dithering", "atkinson-dithering-explained"],
+    guides: ["error-diffusion-vs-ordered-dithering"],
+  },
 ];
 
 export function getPostBySlug(slug: string): Post | undefined {

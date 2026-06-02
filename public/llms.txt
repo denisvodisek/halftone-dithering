@@ -21,6 +21,12 @@ Halftone Dithering FX is a free, browser-based tool that turns photos and video 
 - https://halftone-fx.com/blog/comic-book-halftone-ben-day-dots
 - https://halftone-fx.com/blog/pop-art-halftone-effect
 - https://halftone-fx.com/blog/halftone-for-screen-printing
+- https://halftone-fx.com/blog/how-to-make-a-halftone-effect-in-gimp
+- https://halftone-fx.com/blog/halftone-effect-in-procreate
+- https://halftone-fx.com/blog/halftone-effect-in-figma
+- https://halftone-fx.com/blog/newspaper-photo-effect
+- https://halftone-fx.com/blog/duotone-halftone-effect
+- https://halftone-fx.com/blog/dithering-for-pixel-art
 - https://halftone-fx.com/guides
 - https://halftone-fx.com/guides/what-is-halftone-and-dithering
 - https://halftone-fx.com/guides/error-diffusion-vs-ordered-dithering
