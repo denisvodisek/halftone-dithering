@@ -28,12 +28,28 @@ Next.js + shadcn UI production platform for halftone image/video processing, loc
 Copy `.env.example` to `.env.local` and set:
 
 ```bash
-NEXT_PUBLIC_SITE_URL=https://halftone.studio
+NEXT_PUBLIC_SITE_URL=https://halftone-fx.com
 NEXT_PUBLIC_ADSENSE_CLIENT=
 NEXT_PUBLIC_AD_SLOT_TOP=
 NEXT_PUBLIC_AD_SLOT_INLINE=
 NEXT_PUBLIC_AD_SLOT_FOOTER=
 ```
+
+## Canonical Domain (SEO — important)
+
+The site must be indexed under **one** domain: `https://halftone-fx.com` (non-www, https).
+
+- `lib/site-url.ts` defaults `SITE_URL` to `https://halftone-fx.com`, so canonical
+  tags, the sitemap, and `robots.txt` are correct even if `NEXT_PUBLIC_SITE_URL`
+  is unset. Set the env var anyway to be explicit.
+- `next.config.ts` 301-redirects `www.halftone-fx.com` and the
+  `halftone-dithering.vercel.app` host to the canonical origin.
+- In **Vercel → Settings → Domains**, add both `halftone-fx.com` and
+  `www.halftone-fx.com` and set `halftone-fx.com` as **Primary** so the platform
+  handles www→non-www and http→https.
+- Use a **Domain property** in Google Search Console so all host variants roll up
+  into one view. "Page with redirect" and "Alternative page with proper canonical
+  tag" are expected once variants are consolidated — they are not errors.
 
 ## Local Development
 

@@ -939,6 +939,316 @@ export const posts: Post[] = [
     related: ["what-is-dithering", "atkinson-dithering-explained"],
     guides: ["error-diffusion-vs-ordered-dithering"],
   },
+  {
+    slug: "how-to-make-a-halftone-gradient",
+    title: "How to Make a Halftone Gradient",
+    description:
+      "The fading-dots gradient look, from scratch. How the dots should change across the fade and how to keep it smooth.",
+    updatedAt: "2026-06-06",
+    category: "How-to",
+    keywords: ["halftone gradient", "dot gradient", "halftone fade", "gradient dots effect"],
+    content: [
+      {
+        type: "paragraph",
+        lead: true,
+        text: "A halftone gradient is that look where dots fade from solid to nothing across a shape — big dots on one side, tiny dots on the other. It's everywhere in modern design: backgrounds, hero sections, packaging, album art. The whole effect rests on one idea: the dots should change size as the tone changes.",
+      },
+      { type: "heading", text: "Start with the gradient, then dot it" },
+      {
+        type: "paragraph",
+        text: "The cleanest way to make a halftone gradient is to begin with a plain grey gradient — black fading to white — and run that through a halftone. Where the source is dark, you get large, dense dots. Where it's light, the dots shrink and spread out. The gradient is doing the work; the halftone just translates it into dots.",
+      },
+      {
+        type: "list",
+        items: [
+          "Create or load a smooth black-to-white gradient.",
+          "Apply the halftone and watch the dots scale across the fade.",
+          "Adjust the dot grid for how fine or chunky you want the gradient.",
+          "Flip or angle the source gradient to change the fade direction.",
+        ],
+      },
+      { ...CTA_DEFAULT },
+      { type: "heading", text: "Keep the fade smooth" },
+      {
+        type: "paragraph",
+        text: "If your gradient has banding — visible steps instead of a smooth fade — the halftone will exaggerate it into ugly jumps in dot size. Start from a clean gradient, and if you still see steps, a touch of dithering on the source smooths the transition before the dots ever get applied.",
+      },
+      { type: "heading", text: "Using it as a design element" },
+      {
+        type: "paragraph",
+        text: "Halftone gradients work best as accents: a corner that fades into dots, a band behind a headline, a transition between two colour blocks. Export SVG so the gradient scales to any canvas without the dots blurring, which matters a lot for web heroes and large print. Recolour the dots in your design tool to match the brand.",
+      },
+    ],
+    faq: [
+      {
+        question: "How do I make a halftone gradient?",
+        answer:
+          "Start with a smooth black-to-white gradient and run it through a halftone tool. The dark end becomes large dense dots and the light end becomes small sparse dots, creating the fade.",
+      },
+      {
+        question: "Why does my halftone gradient look banded?",
+        answer:
+          "Banding in the source gradient gets exaggerated by the halftone. Start from a clean gradient and apply a little dithering to smooth the transition before adding dots.",
+      },
+      {
+        question: "Should a halftone gradient be SVG or PNG?",
+        answer:
+          "SVG, if it will be scaled or printed, so the dots stay crisp and recolourable. PNG is fine for a fixed-size element.",
+      },
+    ],
+    related: ["halftone-background-generator", "duotone-halftone-effect"],
+    guides: ["halftone-for-print-dpi-and-svg-export"],
+  },
+  {
+    slug: "cmyk-halftone-angles",
+    title: "CMYK Halftone Angles, Explained",
+    description:
+      "Why colour halftones use specific screen angles for each ink, what the standard angles are, and how to avoid moiré.",
+    updatedAt: "2026-06-06",
+    category: "Explainer",
+    keywords: ["cmyk halftone angles", "halftone screen angles", "moire halftone", "halftone printing angles"],
+    content: [
+      {
+        type: "paragraph",
+        lead: true,
+        text: "If you've looked into colour halftone printing, you've hit the term 'screen angles' — and probably a list of oddly specific numbers like 15°, 45°, 75°. They're not arbitrary. They exist to stop colour printing from turning into an ugly mess called moiré. Here's the why behind them.",
+      },
+      { type: "heading", text: "Why colour needs four screens" },
+      {
+        type: "paragraph",
+        text: "Colour printing builds an image from four inks: cyan, magenta, yellow, and black (CMYK). Each ink gets its own halftone screen of dots. The problem is that four overlapping dot grids, if they all sit at the same angle, interfere with each other and create a distracting wavy pattern. That interference is moiré, and it ruins the print.",
+      },
+      { type: "heading", text: "The standard angles" },
+      {
+        type: "list",
+        items: [
+          "Cyan: 15°",
+          "Black: 45°",
+          "Magenta: 75°",
+          "Yellow: 0° (or 90°)",
+        ],
+      },
+      {
+        type: "paragraph",
+        text: "The key is the spacing between them. The three strongest colours — cyan, magenta, black — are set 30° apart, which is the sweet spot for hiding interference. Black sits at 45° because that angle is least noticeable to the eye, and black carries the most detail. Yellow, being the lightest, can sit at 0° without causing obvious moiré.",
+      },
+      { ...CTA_DEFAULT },
+      { type: "heading", text: "Rosettes: the goal, not the enemy" },
+      {
+        type: "paragraph",
+        text: "When the angles are set correctly, the overlapping dots form a tiny, regular flower-like pattern called a rosette. That's the look you want — it's stable and reads as clean colour from a normal distance. Moiré is what happens when the angles are wrong and the pattern goes wavy instead.",
+      },
+      { type: "heading", text: "Do you need to worry about this?" },
+      {
+        type: "paragraph",
+        text: "For most digital and single-colour work, no — angles only matter when you're separating an image into multiple inked screens for a real press. If you're making a one-colour halftone for the web or a single-ink print, you can pick whatever angle looks good. Save the angle theory for when you're doing genuine CMYK separations.",
+      },
+    ],
+    faq: [
+      {
+        question: "What are the standard CMYK halftone angles?",
+        answer:
+          "Commonly cyan at 15°, black at 45°, magenta at 75°, and yellow at 0°. The strong colours are spaced 30° apart to avoid moiré, and black sits at 45° because it's least noticeable.",
+      },
+      {
+        question: "Why do halftone screens use different angles?",
+        answer:
+          "Four overlapping dot grids at the same angle create a distracting wavy interference pattern called moiré. Offsetting each ink's screen angle hides that interference and produces a clean rosette pattern instead.",
+      },
+      {
+        question: "Do I need to set screen angles for a single-colour halftone?",
+        answer:
+          "No. Angles only matter for multi-ink CMYK separations on a press. For one-colour or digital halftones, use whatever angle looks best.",
+      },
+    ],
+    related: ["halftone-for-screen-printing", "what-is-dithering"],
+    guides: ["halftone-for-print-dpi-and-svg-export"],
+  },
+  {
+    slug: "halftone-background-generator",
+    title: "How to Make a Halftone Background",
+    description:
+      "Dotted halftone backgrounds for websites, posters, and slides — building them, keeping them subtle, and exporting clean.",
+    updatedAt: "2026-06-06",
+    category: "How-to",
+    keywords: ["halftone background", "dot background generator", "halftone pattern background", "dotted background"],
+    content: [
+      {
+        type: "paragraph",
+        lead: true,
+        text: "A halftone background adds texture and depth without shouting. You see it behind hero headlines, on slide decks, in packaging and posters. The trick is making it support the content instead of fighting it, which mostly comes down to restraint.",
+      },
+      { type: "heading", text: "Two ways to build one" },
+      {
+        type: "subheading", text: "From a gradient (for a fade)" },
+      {
+        type: "paragraph",
+        text: "If you want dots that fade across the background, start with a gradient and halftone it. Dots cluster on one side and thin out on the other — perfect for fading a busy corner into clean space where your text will sit.",
+      },
+      {
+        type: "subheading", text: "From a flat tone (for an even texture)" },
+      {
+        type: "paragraph",
+        text: "If you want an even field of dots, start from a flat grey. You'll get a consistent dot pattern across the whole area, which works as a subtle backdrop or a bold graphic field depending on the dot size.",
+      },
+      { ...CTA_DEFAULT },
+      { type: "heading", text: "Keep it readable" },
+      {
+        type: "list",
+        items: [
+          "Lower the contrast between dots and background so text stays legible on top.",
+          "Use a fade so the densest dots sit away from where the copy goes.",
+          "Pick one accent colour rather than a loud one for the dots.",
+          "Leave breathing room — a halftone background should feel like texture, not noise.",
+        ],
+      },
+      { type: "heading", text: "Export for the web" },
+      {
+        type: "paragraph",
+        text: "Export SVG for a background that has to stretch across different screen sizes without the dots going blurry or pixelated. An SVG also stays tiny in file size for a simple dot pattern, which keeps your page fast. For a fixed-size slide or a one-off graphic, a high-resolution PNG is fine.",
+      },
+    ],
+    faq: [
+      {
+        question: "How do I make a halftone background?",
+        answer:
+          "Halftone a gradient for a fading dot effect, or a flat grey for an even dot field. Adjust dot size and contrast so the pattern stays subtle, then export SVG so it scales cleanly.",
+      },
+      {
+        question: "How do I keep text readable over a halftone background?",
+        answer:
+          "Lower the contrast of the dots, use a gradient so the dense dots sit away from the text, and stick to a single subtle accent colour. The background should read as texture, not noise.",
+      },
+      {
+        question: "What format is best for a halftone background on a website?",
+        answer:
+          "SVG. It scales across screen sizes without blurring, stays small in file size for simple dot patterns, and can be recoloured in code or a design tool.",
+      },
+    ],
+    related: ["how-to-make-a-halftone-gradient", "duotone-halftone-effect"],
+    guides: ["halftone-for-print-dpi-and-svg-export"],
+  },
+  {
+    slug: "ascii-art-vs-halftone",
+    title: "ASCII Art vs Halftone: What's the Difference?",
+    description:
+      "Both turn photos into patterns of small marks, but they're built on different ideas. When to use each.",
+    updatedAt: "2026-06-06",
+    category: "Explainer",
+    keywords: ["ascii art vs halftone", "ascii vs halftone", "ascii art effect", "halftone vs ascii"],
+    content: [
+      {
+        type: "paragraph",
+        lead: true,
+        text: "ASCII art and halftone both turn a photo into a grid of small marks that your eye reassembles into an image. They look like cousins, and people often confuse them. But they solve the tone problem in different ways, and that difference decides which one fits your project.",
+      },
+      { type: "heading", text: "How each one fakes tone" },
+      {
+        type: "paragraph",
+        text: "Halftone varies the size of a dot to show tone. Dark areas get big dots, light areas get small ones, all on a regular grid. ASCII art instead swaps in different characters based on brightness — a dense character like @ for dark areas, a sparse one like a full stop for light areas, a space for white. One changes dot size; the other changes which symbol sits in each cell.",
+      },
+      { type: "heading", text: "What they're good for" },
+      {
+        type: "list",
+        items: [
+          "Halftone: print, posters, comics, anything that wants a designed, inked feel.",
+          "ASCII: terminal and code aesthetics, retro computing, text-only contexts like email or chat.",
+          "Halftone scales to vector and prints cleanly; ASCII lives as text or a monospace image.",
+          "Halftone reads at a distance; ASCII often needs you closer to make out the image.",
+        ],
+      },
+      { ...CTA_DEFAULT },
+      { type: "heading", text: "The overlap" },
+      {
+        type: "paragraph",
+        text: "Both rely on the same perceptual trick: from far enough away, a pattern of marks blends into smooth tone. Both also love high contrast, since a flat photo gives them little to work with. And both can be pushed from 'subtle texture' to 'bold graphic statement' depending on how coarse you make the grid.",
+      },
+      { type: "heading", text: "Which should you use?" },
+      {
+        type: "paragraph",
+        text: "If the output is going to print, fabric, or any real design layout, halftone is almost always the answer — it scales, it prints, and it reads as intentional design. Reach for ASCII when the medium is text itself or when the retro-computer look is the whole point.",
+      },
+    ],
+    faq: [
+      {
+        question: "What's the difference between ASCII art and halftone?",
+        answer:
+          "Halftone varies dot size on a grid to show tone, while ASCII art swaps in different characters by brightness. Both fake continuous tone with small marks, but one changes dot size and the other changes the symbol.",
+      },
+      {
+        question: "Is halftone better than ASCII art?",
+        answer:
+          "Neither is better; they suit different uses. Halftone is for print and design layouts because it scales and prints cleanly. ASCII suits text-based and retro-computing contexts.",
+      },
+      {
+        question: "Do ASCII and halftone both need high contrast?",
+        answer:
+          "Yes. Both reproduce tone from a limited set of marks, so a high-contrast source with clear lights and darks gives much better results than a flat image.",
+      },
+    ],
+    related: ["what-is-dithering", "dithering-for-pixel-art"],
+    guides: ["what-is-halftone-and-dithering"],
+  },
+  {
+    slug: "how-to-make-a-halftone-in-illustrator",
+    title: "How to Make a Halftone in Illustrator (and a Faster Way)",
+    description:
+      "Illustrator can build a halftone with effects and the Phantasm plugin. The native route, the limits, and a quicker option.",
+    updatedAt: "2026-06-06",
+    category: "How-to",
+    keywords: ["illustrator halftone", "halftone in illustrator", "illustrator color halftone", "vector halftone"],
+    content: [
+      {
+        type: "paragraph",
+        lead: true,
+        text: "Illustrator is a vector tool, so it's a natural fit for halftone — vector dots scale forever and stay crisp. It can do it natively, with a catch, and there's a popular plugin for serious work. Here's the honest rundown, plus when it's quicker to make the dots elsewhere.",
+      },
+      { type: "heading", text: "The native route: Color Halftone" },
+      {
+        type: "paragraph",
+        text: "Place your image, then go to Effect > Pixelate > Color Halftone. Set a max radius and the four channel angles, and Illustrator screens the image into dots. It works, but there's a catch: this is a raster effect applied inside Illustrator. The dots aren't true editable vector shapes until you expand, and even then the result can be heavy and awkward to clean up.",
+      },
+      {
+        type: "list",
+        items: [
+          "Place the image and increase its contrast first.",
+          "Effect > Pixelate > Color Halftone.",
+          "Set max radius (dot size) and the channel angles.",
+          "Object > Expand if you need to edit the dots, then clean up.",
+        ],
+      },
+      { ...CTA_DEFAULT },
+      { type: "heading", text: "The plugin route: Phantasm" },
+      {
+        type: "paragraph",
+        text: "For real control, designers reach for the Phantasm plugin, which adds a proper halftone with live, editable settings and true vector output. It's the standard for production halftone work in Illustrator. The downside is simple: it's paid, and it's another tool to buy and learn for one effect.",
+      },
+      { type: "heading", text: "When to make the dots elsewhere" },
+      {
+        type: "paragraph",
+        text: "If you just need clean halftone dots to drop into an Illustrator layout, generate them in a browser tool and export SVG. You get true vector dots with a live preview while you tune them, then you place the SVG straight into your artboard and carry on. No Expand cleanup, no plugin purchase. Keep the native effect or Phantasm for when the halftone has to live inside a complex Illustrator build.",
+      },
+    ],
+    faq: [
+      {
+        question: "How do I make a halftone in Illustrator?",
+        answer:
+          "Use Effect > Pixelate > Color Halftone, set the max radius and channel angles, then Object > Expand if you need editable dots. For true vector control, many designers use the paid Phantasm plugin.",
+      },
+      {
+        question: "Why is Illustrator's Color Halftone not editable?",
+        answer:
+          "It's a raster-based effect, so the dots aren't real vector shapes until you expand the object, and even then they can be heavy to clean up.",
+      },
+      {
+        question: "Can I get vector halftone dots without a plugin?",
+        answer:
+          "Yes. Generate the halftone in a browser tool and export SVG, then place that vector straight into Illustrator. You skip the Expand cleanup and the cost of a plugin.",
+      },
+    ],
+    related: ["how-to-make-a-halftone-effect-without-photoshop", "halftone-effect-in-figma"],
+    guides: ["halftone-for-print-dpi-and-svg-export"],
+  },
 ];
 
 export function getPostBySlug(slug: string): Post | undefined {
