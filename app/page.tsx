@@ -102,32 +102,43 @@ export default function HomePage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <div className="space-y-6">
-        <section className="border-l-2 border-primary/70 pl-5" aria-labelledby="intro-heading">
-          <div className="space-y-4">
-            <h1
-              id="intro-heading"
-              className="max-w-3xl text-pretty text-lg font-semibold leading-snug tracking-tight sm:text-xl"
-            >
-              Turn photos and video into halftone dot art — free in your browser
-            </h1>
-            <div className="max-w-3xl space-y-3 text-pretty text-sm leading-relaxed text-muted-foreground sm:text-base">
-              <p>
-                <strong className="font-medium text-foreground">Halftone Dithering FX</strong> is an online halftone
-                generator and image dithering tool. Upload a picture or MP4/WebM clip, set your dot grid, brightness,
-                and contrast, then choose classic{" "}
-                <span className="text-foreground/90">error-diffusion</span> modes — Floyd–Steinberg,
-                Jarvis–Judice–Ninke, Stucki, or Burkes — or switch to <span className="text-foreground/90">ordered</span>{" "}
-                and <span className="text-foreground/90">noise</span> dither for a print or comic look.
-              </p>
-              <p>
-                Compare before and after with a <span className="text-foreground/90">draggable split line</span> on the
-                preview, save looks as local presets, and export production-ready{" "}
-                <span className="text-foreground/90">PNG</span>, scalable <span className="text-foreground/90">SVG</span>{" "}
-                halftone dots, or <span className="text-foreground/90">WebM</span> when you are processing motion — no
-                account required.
-              </p>
-            </div>
+        <section
+          className="relative overflow-hidden rounded-2xl border border-border bg-gradient-to-b from-card to-background px-6 py-10 sm:px-10 sm:py-14"
+          aria-labelledby="intro-heading"
+        >
+          <div
+            aria-hidden
+            className="pointer-events-none absolute -right-16 -top-16 h-64 w-64 rounded-full opacity-[0.07] [background:radial-gradient(circle,currentColor_1.5px,transparent_1.6px)] [background-size:14px_14px] text-primary"
+          />
+          <p className="text-xs font-medium uppercase tracking-[0.24em] text-muted-foreground">
+            Free halftone &amp; dithering studio
+          </p>
+          <h1
+            id="intro-heading"
+            className="mt-4 max-w-4xl text-pretty text-3xl font-semibold leading-[1.05] tracking-tight sm:text-5xl"
+          >
+            Turn any photo or video into <span className="text-primary">halftone dot art</span>
+          </h1>
+          <p className="mt-5 max-w-2xl text-pretty text-base leading-relaxed text-muted-foreground sm:text-lg">
+            Drop in an image, drag a slider, watch the dots appear. Error-diffusion modes — Floyd–Steinberg,
+            Jarvis–Judice–Ninke, Stucki, Burkes — or ordered and noise dither for a print or comic look. Live split
+            preview, savable presets, and export to PNG, SVG, or WebM.
+          </p>
+          <div className="mt-7 flex flex-wrap gap-2">
+            {["Floyd–Steinberg", "Ordered dither", "Custom mark shapes", "SVG export", "Video / WebM", "Split preview"].map(
+              (pill) => (
+                <span
+                  key={pill}
+                  className="rounded-full border border-border bg-background/60 px-3 py-1 text-xs font-medium text-foreground/80"
+                >
+                  {pill}
+                </span>
+              ),
+            )}
           </div>
+          <p className="mt-7 text-xs text-muted-foreground">
+            Runs entirely in your browser · Your files never leave your device · No signup
+          </p>
         </section>
         <HalftoneWorkbench />
       </div>
