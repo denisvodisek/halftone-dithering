@@ -8,11 +8,13 @@ interface SiteShellProps {
 
 const NAV_LINKS = [
   { href: "/", label: "Tool" },
+  { href: "/blog", label: "Blog" },
   { href: "/guides", label: "Guides" },
   { href: "/about", label: "About" },
 ];
 
 const FOOTER_LINKS = [
+  { href: "/blog", label: "Blog" },
   { href: "/guides", label: "Guides" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },

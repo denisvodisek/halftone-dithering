@@ -104,12 +104,12 @@ export default function HomePage() {
       <div className="space-y-6">
         <section className="border-l-2 border-primary/70 pl-5" aria-labelledby="intro-heading">
           <div className="space-y-4">
-            <h2
+            <h1
               id="intro-heading"
               className="max-w-3xl text-pretty text-lg font-semibold leading-snug tracking-tight sm:text-xl"
             >
               Turn photos and video into halftone dot art — free in your browser
-            </h2>
+            </h1>
             <div className="max-w-3xl space-y-3 text-pretty text-sm leading-relaxed text-muted-foreground sm:text-base">
               <p>
                 <strong className="font-medium text-foreground">Halftone Dithering FX</strong> is an online halftone

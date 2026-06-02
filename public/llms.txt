@@ -1,0 +1,34 @@
+# Halftone Dithering FX
+
+## What this site is
+Halftone Dithering FX is a free, browser-based tool that turns photos and video into halftone dot art and dithered images. It runs fully client-side and never uploads your files.
+
+## Primary actions
+- Convert an image or video to a halftone / dithered effect in the browser
+- Choose error-diffusion (Floyd–Steinberg, Jarvis–Judice–Ninke, Stucki, Burkes) or ordered / noise dithering
+- Adjust dot grid size, contrast, gamma, smoothing, and mark shape
+- Compare original vs result with a split preview
+- Export PNG, SVG (vector dots), or WebM video
+
+## Key pages
+- https://halftone-fx.com/
+- https://halftone-fx.com/blog
+- https://halftone-fx.com/blog/how-to-make-a-halftone-effect-without-photoshop
+- https://halftone-fx.com/blog/what-is-dithering
+- https://halftone-fx.com/blog/floyd-steinberg-dithering-explained
+- https://halftone-fx.com/blog/atkinson-dithering-explained
+- https://halftone-fx.com/blog/risograph-effect-online
+- https://halftone-fx.com/blog/comic-book-halftone-ben-day-dots
+- https://halftone-fx.com/blog/pop-art-halftone-effect
+- https://halftone-fx.com/blog/halftone-for-screen-printing
+- https://halftone-fx.com/guides
+- https://halftone-fx.com/guides/what-is-halftone-and-dithering
+- https://halftone-fx.com/guides/error-diffusion-vs-ordered-dithering
+- https://halftone-fx.com/guides/halftone-for-print-dpi-and-svg-export
+- https://halftone-fx.com/guides/best-halftone-settings-for-portraits
+- https://halftone-fx.com/guides/newspaper-vs-comic-dithering
+- https://halftone-fx.com/guides/video-to-halftone-workflow
+- https://halftone-fx.com/about
+- https://halftone-fx.com/privacy
+- https://halftone-fx.com/terms
+- https://halftone-fx.com/contact

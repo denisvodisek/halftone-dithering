@@ -63,7 +63,7 @@ export default async function GuideSlugPage({ params }: GuideSlugPageProps) {
         </Link>
         <header className="mt-6 border-l-2 border-primary/70 pl-5">
           <p className="text-xs font-medium uppercase tracking-[0.24em] text-muted-foreground">Halftone guide</p>
-          <h2 className="mt-3 text-2xl font-semibold tracking-tight sm:text-3xl">{guide.title}</h2>
+          <h1 className="mt-3 text-2xl font-semibold tracking-tight sm:text-3xl">{guide.title}</h1>
           <p className="mt-4 text-sm leading-relaxed text-muted-foreground sm:text-base">{guide.description}</p>
           <p className="mt-3 text-xs text-muted-foreground">Updated {guide.updatedAt}</p>
         </header>

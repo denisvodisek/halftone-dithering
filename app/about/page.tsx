@@ -17,7 +17,7 @@ export default function AboutPage() {
       <article className="mx-auto w-full max-w-3xl">
         <header className="border-l-2 border-primary/70 pl-5">
           <p className="text-xs font-medium uppercase tracking-[0.24em] text-muted-foreground">About</p>
-          <h2 className="mt-3 text-2xl font-semibold tracking-tight sm:text-3xl">About {SITE_NAME}</h2>
+          <h1 className="mt-3 text-2xl font-semibold tracking-tight sm:text-3xl">About {SITE_NAME}</h1>
           <p className="mt-4 text-sm leading-relaxed text-muted-foreground sm:text-base">
             A free, browser-based halftone generator and dithering studio for designers, illustrators, and anyone who
             likes the look of printed dots.

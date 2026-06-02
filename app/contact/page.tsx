@@ -15,7 +15,7 @@ export default function ContactPage() {
       <article className="mx-auto w-full max-w-3xl">
         <header className="border-l-2 border-primary/70 pl-5">
           <p className="text-xs font-medium uppercase tracking-[0.24em] text-muted-foreground">Contact</p>
-          <h2 className="mt-3 text-2xl font-semibold tracking-tight sm:text-3xl">Contact us</h2>
+          <h1 className="mt-3 text-2xl font-semibold tracking-tight sm:text-3xl">Contact us</h1>
           <p className="mt-4 text-sm leading-relaxed text-muted-foreground sm:text-base">
             We read every message about {SITE_NAME} — whether it is a bug, a feature idea, or a question about getting a
             particular halftone look.

@@ -16,9 +16,9 @@ export default function GuidesPage() {
     <SiteShell>
       <section className="max-w-3xl border-l-2 border-primary/70 pl-5" aria-labelledby="guides-heading">
         <p className="text-xs font-medium uppercase tracking-[0.24em] text-muted-foreground">Halftone guides</p>
-        <h2 id="guides-heading" className="mt-3 text-2xl font-semibold tracking-tight sm:text-3xl">
+        <h1 id="guides-heading" className="mt-3 text-2xl font-semibold tracking-tight sm:text-3xl">
           Learn how to tune halftone and dithering effects
-        </h2>
+        </h1>
         <p className="mt-4 text-sm leading-relaxed text-muted-foreground sm:text-base">
           These guides explain how grid size, contrast, smoothing, and dither algorithms affect real output. Use them
           with the live workbench when you need a repeatable look for portraits, print-style graphics, or motion assets.

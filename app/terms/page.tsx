@@ -18,7 +18,7 @@ export default function TermsPage() {
       <article className="mx-auto w-full max-w-3xl">
         <header className="border-l-2 border-primary/70 pl-5">
           <p className="text-xs font-medium uppercase tracking-[0.24em] text-muted-foreground">Legal</p>
-          <h2 className="mt-3 text-2xl font-semibold tracking-tight sm:text-3xl">Terms of Service</h2>
+          <h1 className="mt-3 text-2xl font-semibold tracking-tight sm:text-3xl">Terms of Service</h1>
           <p className="mt-3 text-xs text-muted-foreground">Last updated {EFFECTIVE_DATE}</p>
         </header>
 
