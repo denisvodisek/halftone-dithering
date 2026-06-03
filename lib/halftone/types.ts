@@ -46,9 +46,9 @@ export interface SavedPreset {
 }
 
 export const DEFAULT_SETTINGS: HalftoneSettings = {
-  gridSize: 20,
+  gridSize: 15,
   markShape: "Circle",
-  brightness: 20,
+  brightness: 50,
   contrast: 0,
   gamma: 1,
   smoothing: 0,
