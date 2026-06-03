@@ -20,7 +20,7 @@ const SAVED_PRESET_STORAGE_KEY = "halftone.savedConfigs";
 /** Preview cap keeps huge photos responsive; exports still use full resolution. */
 const PREVIEW_MAX_LONG_SIDE = 2048;
 
-const DEFAULT_VIDEO_URL = "https://i.imgur.com/5PrJCc2.mp4";
+const DEFAULT_VIDEO_URL = "/hero-tiger.mp4";
 
 /** Some browsers leave `file.type` empty for valid video files. */
 const VIDEO_FILENAME = /\.(mp4|webm|mov|m4v|mkv|ogv)(\?.*)?$/i;
