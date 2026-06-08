@@ -397,7 +397,14 @@ export function HalftoneWorkbench() {
   };
 
   return (
-    <section className="halftone-workbench-shell rounded-lg border border-border bg-background/40 p-4 md:p-5">
+    <section className="halftone-workbench-shell border border-foreground/15 bg-card p-4 md:p-5">
+      <div className="mb-4 flex items-center justify-between gap-3 border-b border-foreground/15 pb-4">
+        <div className="flex items-center gap-2.5">
+          <span aria-hidden className="halftone-dots size-5 border border-foreground/20 text-primary" />
+          <h2 className="font-display text-sm font-bold uppercase tracking-[0.12em]">The Workbench</h2>
+        </div>
+        <span className="text-[0.7rem] uppercase tracking-[0.14em] text-muted-foreground">Live preview</span>
+      </div>
       <div className="grid grid-cols-1 gap-5 xl:grid-cols-[420px_minmax(0,1fr)] xl:items-start xl:gap-6">
         <div className="space-y-6">
           <ControlPanel

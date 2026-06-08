@@ -101,44 +101,50 @@ export default function HomePage() {
     <SiteShell>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
-      <div className="space-y-6">
+      <div className="space-y-8">
         <section
-          className="relative overflow-hidden rounded-2xl border border-border bg-gradient-to-b from-card to-background px-6 py-10 sm:px-10 sm:py-14"
+          className="relative overflow-hidden border border-foreground/15 bg-card"
           aria-labelledby="intro-heading"
         >
           <div
             aria-hidden
-            className="pointer-events-none absolute -right-16 -top-16 h-64 w-64 rounded-full opacity-[0.07] [background:radial-gradient(circle,currentColor_1.5px,transparent_1.6px)] [background-size:14px_14px] text-primary"
+            className="halftone-dots halftone-dots-fade pointer-events-none absolute inset-0 text-primary/25"
           />
-          <p className="text-xs font-medium uppercase tracking-[0.24em] text-muted-foreground">
-            Free halftone &amp; dithering studio
-          </p>
-          <h1
-            id="intro-heading"
-            className="mt-4 max-w-4xl text-pretty text-3xl font-semibold leading-[1.05] tracking-tight sm:text-5xl"
-          >
-            Turn any photo or video into <span className="text-primary">halftone dot art</span>
-          </h1>
-          <p className="mt-5 max-w-2xl text-pretty text-base leading-relaxed text-muted-foreground sm:text-lg">
-            Drop in an image, drag a slider, watch the dots appear. Error-diffusion modes — Floyd–Steinberg,
-            Jarvis–Judice–Ninke, Stucki, Burkes — or ordered and noise dither for a print or comic look. Live split
-            preview, savable presets, and export to PNG, SVG, or WebM.
-          </p>
-          <div className="mt-7 flex flex-wrap gap-2">
-            {["Floyd–Steinberg", "Ordered dither", "Custom mark shapes", "SVG export", "Video / WebM", "Split preview"].map(
-              (pill) => (
-                <span
-                  key={pill}
-                  className="rounded-full border border-border bg-background/60 px-3 py-1 text-xs font-medium text-foreground/80"
-                >
-                  {pill}
-                </span>
-              ),
-            )}
+          <div className="relative px-6 py-12 sm:px-10 sm:py-16">
+            <div className="flex flex-wrap items-center gap-3">
+              <span className="inline-flex items-center gap-2 border border-foreground/20 bg-background px-3 py-1 text-[0.7rem] font-medium uppercase tracking-[0.18em] text-foreground/80">
+                <span aria-hidden className="size-1.5 rounded-full bg-primary" />
+                Free halftone &amp; dithering studio
+              </span>
+            </div>
+            <h1
+              id="intro-heading"
+              className="mt-6 max-w-4xl text-balance font-display text-4xl font-bold leading-[0.98] tracking-tight sm:text-6xl lg:text-7xl"
+            >
+              Turn any photo or video into{" "}
+              <span className="text-primary">halftone dot art</span>
+            </h1>
+            <p className="mt-6 max-w-2xl text-pretty text-sm leading-relaxed text-muted-foreground sm:text-base">
+              Drop in an image, drag a slider, watch the dots appear. Error-diffusion modes — Floyd–Steinberg,
+              Jarvis–Judice–Ninke, Stucki, Burkes — or ordered and noise dither for a print or comic look. Live split
+              preview, savable presets, and export to PNG, SVG, or WebM.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-2">
+              {["Floyd–Steinberg", "Ordered dither", "Custom mark shapes", "SVG export", "Video / WebM", "Split preview"].map(
+                (pill) => (
+                  <span
+                    key={pill}
+                    className="border border-foreground/15 bg-background px-3 py-1 text-xs font-medium uppercase tracking-wide text-foreground/75"
+                  >
+                    {pill}
+                  </span>
+                ),
+              )}
+            </div>
+            <p className="mt-8 text-xs uppercase tracking-[0.1em] text-muted-foreground">
+              Runs entirely in your browser · Your files never leave your device · No signup
+            </p>
           </div>
-          <p className="mt-7 text-xs text-muted-foreground">
-            Runs entirely in your browser · Your files never leave your device · No signup
-          </p>
         </section>
         <HalftoneWorkbench />
       </div>
